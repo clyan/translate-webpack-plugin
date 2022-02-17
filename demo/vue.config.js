@@ -1,5 +1,5 @@
 const { defineConfig } = require('@vue/cli-service')
-const TranslateWebpackPlugin  = require('../translate-language/TranslateWebpackPlugin')
+const TranslateWebpackPlugin  = require('../TranslateWebpackPlugin')
 module.exports = defineConfig({
   transpileDependencies: true,
   configureWebpack:{

@@ -1,4 +1,6 @@
+const path = require("path");
 const fetch = require("node-fetch");
+const RawSource = require('webpack-sources').RawSource;
 /**
  *
  * @param {*} content 打包后的bundle文件内容
@@ -85,15 +87,19 @@ class TransformPlugin {
           separator: this.separator,
         });
         if (targetList.length <= 0) return content;
-
-        // TODO: 替换
+        console.log("targetList", targetList);
+        // TODO: 替换tempContent 为代码格式，所以replace会有问题
         targetList.forEach((phrase, index) => {
-          tempContent.replace(sourceList[index], phrase);
+          console.log(sourceList[index], phrase);
+          let n = tempContent.replace(sourceList[index], phrase);
+          if(index === 4) {
+            console.log("n", n);
+          }
         });
-        console.log("targetList", targetList); // 打印中文数据
-
+        // console.log("tempContent", tempContent); // 打印中文数据
         // TODO: 写入
-        return tempContent;
+        // console.log(new RawSource(tempContent))
+        compilation.assets[targetPath] = new RawSource(tempContent);
       }
     );
   }

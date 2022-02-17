@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/ywymoshi/translate-language/issues"
   },
-  "homepage": "https://github.com/ywymoshi/translate-language#readme"
+  "homepage": "https://github.com/ywymoshi/translate-language#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.7",
+    "webpack-sources": "^3.2.3"
+  }
 }
