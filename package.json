@@ -1,0 +1,20 @@
+{
+  "name": "translate-language",
+  "version": "1.0.0",
+  "description": "",
+  "main": "TranslateWebpackPlugin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ywymoshi/translate-language.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ywymoshi/translate-language/issues"
+  },
+  "homepage": "https://github.com/ywymoshi/translate-language#readme"
+}
