@@ -8,7 +8,7 @@ module.exports = defineConfig({
         translateApiUrl: "http://127.0.0.1:8999/api",
         from: "zh-CN",
         to: "zh-TW",
-        separator: "A",
+        separator: "|",
         regex: /[\u4e00-\u9fa5]/g,
       }),
     ],

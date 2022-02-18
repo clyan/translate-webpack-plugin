@@ -56,6 +56,7 @@ class TransformWebpackPlugin {
       regex: /[\u4e00-\u9fa5]/g,
     }
   ) {
+    // console.log("TransformWebpackPlugin is start");
     if (!options.translateApiUrl)
       throw new ReferenceError("translateApiUrl 参数不存在");
     this.options = options;
@@ -70,6 +71,7 @@ class TransformWebpackPlugin {
           stage: compilation.constructor.PROCESS_ASSETS_STAGE_ADDITIONS,
         },
         async (assets) => {
+          console.log("processAssets is start");
           for (const [pathname, source] of Object.entries(assets)) {
             const dest = compiler.options.output.path;
             const outputPath = path.resolve(dest, pathname);
