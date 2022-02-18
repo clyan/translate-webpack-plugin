@@ -1,4 +1,4 @@
-const { sources } = require("webpack");
+const { sources, Compilation } = require("webpack");
 const path = require("path");
 const fetch = require("node-fetch");
 /**
@@ -52,7 +52,7 @@ class TransformWebpackPlugin {
       translateApiUrl: "",
       from: "zh-CN",
       to: "zh-TW",
-      separator: "A",
+      separator: "|",
       regex: /[\u4e00-\u9fa5]/g,
     }
   ) {
@@ -63,13 +63,13 @@ class TransformWebpackPlugin {
   apply(compiler) {
     const { separator, translateApiUrl, from, to, regex } = this.options;
     const outputNormal = {};
-    compiler.hooks.compilation.tap(pluginName, (compilation) => {
-      compilation.hooks.processAssets.tap(
+    compiler.hooks.thisCompilation.tap(pluginName, (compilation) => {
+      compilation.hooks.processAssets.tapAsync(
         {
           name: pluginName,
-          stage: compilation.constructor.PROCESS_ASSETS_STAGE_ADDITIONS,
+          stage: Compilation.PROCESS_ASSETS_STAGE_OPTIMIZE_INLINE,
         },
-        async (assets) => {
+        async (assets, callback) => {
           for (const [pathname, source] of Object.entries(assets)) {
             const dest = compiler.options.output.path;
             const outputPath = path.resolve(dest, pathname);
@@ -107,6 +107,11 @@ class TransformWebpackPlugin {
               content: sourceCode,
               size: Buffer.from(sourceCode, "utf-8").length,
             };
+            // compilation.updateAsset(
+            //   pathname,
+            //   new sources.RawSource(sourceCode)
+            // );
+            return callback();
           }
         }
       );

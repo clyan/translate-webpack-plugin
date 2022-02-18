@@ -1,22 +1,26 @@
 {
-  "name": "translate-language",
+  "name": "translate-webpack-plugin",
   "version": "1.0.0",
   "description": "",
-  "main": "TranslateWebpackPlugin.js",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "typings.d.ts"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ywymoshi/translate-language.git"
+    "url": "git+https://github.com/ywymoshi/translate-webpack-plugin.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ywymoshi/translate-language/issues"
+    "url": "https://github.com/ywymoshi/translate-webpack-plugin/issues"
   },
-  "homepage": "https://github.com/ywymoshi/translate-language#readme",
+  "homepage": "https://github.com/ywymoshi/translate-webpack-plugin#readme",
   "dependencies": {
     "node-fetch": "^2.6.7"
   },
@@ -24,6 +28,9 @@
     "webpack": "^5.69.1"
   },
   "devDependencies": {
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "2.1.0",
+    "release-it": "^14.12.4",
     "webpack": "^5.69.1"
   }
 }
