@@ -18,7 +18,12 @@
   },
   "homepage": "https://github.com/ywymoshi/translate-language#readme",
   "dependencies": {
-    "node-fetch": "^2.6.7",
-    "webpack-sources": "^3.2.3"
+    "node-fetch": "^2.6.7"
+  },
+  "peerDependencies": {
+    "webpack": "^5.69.1"
+  },
+  "devDependencies": {
+    "webpack": "^5.69.1"
   }
 }

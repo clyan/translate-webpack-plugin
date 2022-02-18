@@ -22,7 +22,7 @@ const { PUPPETEER_WS_ENDPOINT, PAGE_COUNT = "5", PORT = 8999 } = process.env;
   fastify.register(require("./routers/index").default, { prefix: "/" });
 
   try {
-    await fastify.listen(PORT, "0.0.0.0");
+    await fastify.listen(PORT, "127.0.0.1");
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);

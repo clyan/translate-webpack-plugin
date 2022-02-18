@@ -52,7 +52,7 @@ class TransformWebpackPlugin {
       translateApiUrl: "",
       from: "zh-CN",
       to: "zh-TW",
-      separator: "|",
+      separator: "A",
       regex: /[\u4e00-\u9fa5]/g,
     }
   ) {
