@@ -1,4 +1,4 @@
-<h1 align="center">translate-webpack-plugin</h1>
+<h1 align="center">translate-language-webpack-plugin</h1>
 
 <p align="center">一款用于自动化转换语言的插件，不同于i18n, 无需写多套语言文件, 采用谷歌API进行翻译，只需要编写一种语言，即可转换为其他任意语言</p>
 
@@ -7,9 +7,10 @@
 该插件诞生于中文简体转中文繁体场景下，其他场景未测试，理论上只需要编写匹配对应语言的正则，即可转移成任意其他语言，
 
 ## 前置工作
-该插件依赖于谷歌翻译API，但是谷歌API是收费的，幸运的是，这里有一个基于Puppeteer免费API,理论上基于Puppeteer该服务是不会挂掉的, 所以需要先从 [Translateer](git@github.com:ywymoshi/Translateer.git) 或者 [translate-webpack-plugin](git@github.com:ywymoshi/translate-webpack-plugin.git)仓库的`api`目录 拉取代码在本地或服务器部署服务。
+该插件依赖于谷歌翻译API，但是谷歌API是收费的，幸运的是，这里有一个基于Puppeteer免费API,理论上基于Puppeteer该服务是不会挂掉的, 所以需要先从 [Translateer](git@github.com:ywymoshi/Translateer.git) 或者 [translate-language-webpack-plugin](git@github.com:ywymoshi/translate-language-webpack-plugin.git)仓库的`api`目录 拉取代码在本地或服务器部署服务。
 
 注意：部署API服务的服务器需要能访问`https://translate.google.cn/`（科学上网）。
+
 **clone代码**
 ```bash
   git clone git@github.com:ywymoshi/Translateer.git
@@ -28,26 +29,26 @@ npm run dev
 ## 安装
 ### Webpack5.0
 ```bash
-  npm i --save-dev translate-webpack-plugin
+  npm i --save-dev translate-language-webpack-plugin
 ```
 
 ```bash
-  yarn add --dev translate-webpack-plugin
+  yarn add --dev translate-language-webpack-plugin
 ```
 ### Webpack4.0
 ```bash
-  npm i --save-dev translate-webpack-plugin@4
+  npm i --save-dev translate-language-webpack-plugin@4
 ```
 
 ```bash
-  yarn add --dev translate-webpack-plugin@4
+  yarn add --dev translate-language-webpack-plugin@4
 ```
 
 ## 使用
 
 **vue.config.js**
 ```javascript
-const TranslateWebpackPlugin = require('translate-webpack-plugin');
+const TranslateWebpackPlugin = require('translate-language-webpack-plugin');
 module.exports = defineConfig({
   transpileDependencies: true,
   configureWebpack: {
