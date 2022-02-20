@@ -1,5 +1,5 @@
 {
-  "name": "translate-webpack-plugin",
+  "name": "translate-language-webpack-plugin",
   "version": "5.0.0",
   "description": "A plug-in that automatically converts languages",
   "main": "index.js",
@@ -7,6 +7,9 @@
   "files": [
     "index.js"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "release": "release-it",
     "api": "cd api && npm install && npm run dev",
@@ -14,15 +17,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ywymoshi/translate-webpack-plugin.git"
+    "url": "git+https://github.com/ywymoshi/translate-language-webpack-plugin.git"
   },
   "keywords": [],
   "author": "ywymoshi",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ywymoshi/translate-webpack-plugin/issues"
+    "url": "https://github.com/ywymoshi/translate-language-webpack-plugin/issues"
   },
-  "homepage": "https://github.com/ywymoshi/translate-webpack-plugin#readme",
+  "homepage": "https://github.com/ywymoshi/translate-language-webpack-plugin#readme",
   "dependencies": {
     "fs-extra": "^8.1.0",
     "husky": "^4.2.5",
