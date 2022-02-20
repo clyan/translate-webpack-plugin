@@ -1,36 +1,69 @@
 {
   "name": "translate-webpack-plugin",
-  "version": "1.0.0",
-  "description": "",
+  "version": "5.0.0",
+  "description": "A plug-in that automatically converts languages",
   "main": "index.js",
+  "module": "index.js",
   "files": [
-    "index.js",
-    "typings.d.ts"
+    "index.js"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "release": "release-it",
+    "api": "cd api && npm install && npm run dev",
+    "dev:example": "cd example && npm install && npm run serve"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ywymoshi/translate-webpack-plugin.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "ywymoshi",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ywymoshi/translate-webpack-plugin/issues"
   },
   "homepage": "https://github.com/ywymoshi/translate-webpack-plugin#readme",
   "dependencies": {
+    "fs-extra": "^8.1.0",
     "node-fetch": "^2.6.7"
   },
   "peerDependencies": {
     "webpack": "^5.69.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.2.1",
+    "@commitlint/config-conventional": "^16.2.1",
+    "@commitlint/load": "^16.2.1",
     "commitizen": "^4.2.4",
-    "cz-conventional-changelog": "2.1.0",
+    "eslint": "^8.2.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^10.2.7",
+    "prettier": "2.1.0",
     "release-it": "^14.12.4",
     "webpack": "^5.69.1"
+  },
+  "lint-staged": {
+    "*.md": "prettier --write",
+    "*.{ts,tsx,js,vue,less}": "prettier --write",
+    "*.{ts,tsx,js,vue}": "eslint --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
+    }
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "es6": true
+    },
+    "parserOptions": {
+      "requireConfigFile": "false"
+    },
+    "extends": [
+      "eslint:recommended"
+    ],
+    "rules": {}
   }
 }
