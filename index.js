@@ -99,8 +99,14 @@ class TransformWebpackPlugin {
     this.options = options;
   }
   apply(compiler) {
-    const { separator, translateApiUrl, from, to, regex, outputTxt } =
-      this.options;
+    const {
+      separator,
+      translateApiUrl,
+      from,
+      to,
+      regex,
+      outputTxt,
+    } = this.options;
     const outputNormal = {};
     const sourceAllList = {};
     const targetAllList = {};
@@ -131,10 +137,25 @@ class TransformWebpackPlugin {
               separator: separator,
             });
 
+            // 输出对照文件应该在出错之签
+            if (outputTxt) {
+              sourceAllList[outputPath] = sourceList.join(separator);
+              targetAllList[outputPath] = targetList.join(separator);
+            }
+
             // 如果翻译后的结果与原数组的长度不一致，说明翻译有问题。此时应该抛出错误，解决API翻译的问题
             // 如果API翻译有问题，基本整个插件就废了
             // TODO：这一步应该可以在外部提供一个配置，用于手动校对。
             if (targetList.length !== sourceList.length) {
+              if (outputTxt) {
+                // 出错了则输入日志
+                this.writeFile(
+                  outputPath,
+                  pathname,
+                  sourceAllList,
+                  targetAllList
+                );
+              }
               throw new Error(
                 `Translation error, sourceList length: ${sourceList.length}, targetList length: ${targetList.length}`
               );
@@ -144,11 +165,6 @@ class TransformWebpackPlugin {
             targetList.forEach((phrase, index) => {
               sourceCode = sourceCode.replace(sourceList[index], phrase);
             });
-
-            if (outputTxt) {
-              sourceAllList[outputPath] = sourceList.join(separator);
-              targetAllList[outputPath] = targetList.join(separator);
-            }
 
             outputNormal[outputPath] = {
               filename: pathname,
@@ -169,8 +185,11 @@ class TransformWebpackPlugin {
         for (const [key, value] of Object.entries(outputNormal)) {
           if (outputTxt) {
             // 输出原语言与目标语言对照版
-            outputFile(
-              `======: ${outputNormal[key].filename} :====== \r\n ${sourceAllList[key]} \r\n ${targetAllList[key]} \r\n`
+            this.writeFile(
+              key,
+              outputNormal[key].filename,
+              sourceAllList,
+              targetAllList
             );
           }
 
@@ -181,6 +200,11 @@ class TransformWebpackPlugin {
         }
       });
     });
+  }
+  writeFile(outputPath, filename, sourceAllList, targetAllList) {
+    outputFile(
+      `======: ${filename} :====== \r\n ${sourceAllList[outputPath]} \r\n ${targetAllList[outputPath]} \r\n`
+    );
   }
 }
 
