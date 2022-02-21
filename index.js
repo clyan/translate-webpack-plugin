@@ -1,4 +1,4 @@
-const { sources } = require('webpack');
+const { RawSource } = require('webpack-sources');
 const path = require('path');
 const fetch = require('node-fetch');
 const fse = require('fs-extra');
@@ -154,7 +154,7 @@ class TransformLanguageWebpackPlugin {
         targetList.forEach((phrase, index) => {
           sourceCode = sourceCode.replace(sourceList[index], phrase);
         });
-        compilation.updateAsset(pathname, new sources.RawSource(sourceCode));
+        compilation.updateAsset(pathname, new RawSource(sourceCode));
         if (outputTxt) {
           clearFile();
           // 输出原语言与目标语言对照版
