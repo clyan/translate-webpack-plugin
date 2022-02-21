@@ -28,7 +28,6 @@
   "homepage": "https://github.com/ywymoshi/translate-language-webpack-plugin#readme",
   "dependencies": {
     "fs-extra": "^8.1.0",
-    "husky": "^4.2.5",
     "node-fetch": "^2.6.7"
   },
   "peerDependencies": {
@@ -43,7 +42,8 @@
     "lint-staged": "^10.2.7",
     "prettier": "2.1.0",
     "release-it": "^14.12.4",
-    "webpack": "^5.69.1"
+    "webpack": "^5.69.1",
+    "husky": "^4.2.5"
   },
   "lint-staged": {
     "*.md": "prettier --write",
