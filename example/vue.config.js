@@ -1,4 +1,3 @@
-// const TranslateLanguageWebpackPlugin = require('translate-language-webpack-plugin');
 const TranslateLanguageWebpackPlugin = require('translate-language-webpack-plugin');
 module.exports = {
   configureWebpack: {
