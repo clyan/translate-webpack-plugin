@@ -1,11 +1,11 @@
 const { defineConfig } = require('@vue/cli-service');
-const TranslateWebpackPlugin = require('translate-language-webpack-plugin');
+const TranslateWebpackPlugin = require('../index.js');
 module.exports = defineConfig({
   transpileDependencies: true,
   configureWebpack: {
     plugins: [
       new TranslateWebpackPlugin({
-        translateApiUrl: 'http://127.0.0.1:8999/api',
+        translateApiUrl: 'http://127.0.0.1:8999/api/post',
         from: 'zh-CN',
         to: 'zh-TW',
         separator: '|',
