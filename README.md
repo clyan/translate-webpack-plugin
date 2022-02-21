@@ -3,29 +3,41 @@
 <p align="center">A plug-in for automatic language conversion, unlike i18N, no need to write multiple sets of language files, With Google API translation, you only need to write one language and convert it to any other language</p>
 
 English | [简体中文](./README.zh-CN.md)
+
 ## Introduction
+
 This plug-in was born in the scenario of converting simplified Chinese to traditional Chinese, and other scenarios have not been tested，In theory, you only need to write the regularity of the corresponding language, you can convert it into any other language
-regular expression
+
 ## Pre-Wrok
+
 The plugin relies on Google Translate API, but Google API is charged. Fortunately, there is a free API based on Puppeteer. In theory, the service based on Puppeteer will not hang, so you need to start from [Translateer](git@ github.com:ywymoshi/Translateer.git) or [translate-language-webpack-plugin](git@github.com:ywymoshi/translate-language-webpack-plugin.git) Pull the code from the `api` directory of the repository and deploy the service locally or on the server.
 
 Note: The server deploying the API service needs to be able to access `https://translate.google.cn/` (Scientific Internet).
 
 **Clone Code**
+
 ```bash
 git clone git@github.com:ywymoshi/Translateer.git
 ```
+
 **Install Dependencies**
+
 ```bash
-npm install 
+npm install
 ```
+
 **Run**
+
 ```bash
 npm run dev
 ```
+
 The default port is 8999. If your current IP is 127.0.0.1, then your translation api address is: `http://127.0.0.1:8999/api` (Modify it yourself)
+
 ## Install
+
 ### Webpack5.0
+
 ```bash
   npm i --save-dev translate-language-webpack-plugin
 ```
@@ -33,7 +45,9 @@ The default port is 8999. If your current IP is 127.0.0.1, then your translation
 ```bash
   yarn add --dev translate-language-webpack-plugin
 ```
+
 ### Webpack4.0
+
 ```bash
   npm i --save-dev translate-language-webpack-plugin@4
 ```
@@ -45,6 +59,7 @@ The default port is 8999. If your current IP is 127.0.0.1, then your translation
 ## Usage
 
 **vue.config.js**
+
 ```javascript
 const TranslateWebpackPlugin = require('translate-language-webpack-plugin');
 module.exports = defineConfig({
@@ -66,16 +81,17 @@ module.exports = defineConfig({
 
 ## Option
 
-|Name|Type|Default|Require|Description|
-|:--:|:--:|:------:|:--:|:----------|
-|**`translateApiUrl`**|`String`|`''`|`true`|`Address of the API`|
-|**`from`**|`String`|`'zh-CN'`|`true`|`source language`|
-|**`to`**|`String`|`'zh-TW'`|`true`|`target language`|`internally`|
-|**`separator`**|`String`|`'\|'`|`false`|`A language separator, a character used to delimit multiple phrases`|
-|**`regex`**|`RegExp`|`/[\u4e00-\u9fa5]/g`|`true`|`A regular expression that matches the source language`|
-|**`outputTxt`**|`Boolean`|`false`|`false`|`Used to output the source language and target language comparison, convenient to check for errors`|
+| Name | Type | Default | Description |
+| :-: | :-: | :-: | :-- |
+| **`translateApiUrl`** | `String` | `''` | `Address of the API` |
+| **`from`** | `String` | `'zh-CN'` | `source language` |
+| **`to`** | `String` | `'zh-TW'` | `target language` | `internally` |
+| **`separator`** | `String` | `'\|'` | `A language separator, a character used to delimit multiple phrases` |
+| **`regex`** | `RegExp` | `/[\u4e00-\u9fa5]/g` | `A regular expression that matches the source language` |
+| **`outputTxt`** | `Boolean` | `false` | `Used to output the source language and target language comparison, convenient to check for errors` |
 
 ## Basic Principles
+
 1. Take Simplified Chinese to Traditional Chinese as an example
 2. Need a free, accurate, and easy-to-hang translation service, using Google API based on Puppeteer
 3. Write a webpack plug-in, and read the content matched by the regular expression during the compilation process, in units of phrases, for example, the source code contains `<p>disconnected</p><div>tie shoelaces</div> , returns: ['missing', 'tying shoelaces']`
