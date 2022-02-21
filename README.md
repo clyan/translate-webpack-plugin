@@ -97,3 +97,7 @@ module.exports = defineConfig({
 3. Write a webpack plug-in, and read the content matched by the regular expression during the compilation process, in units of phrases, for example, the source code contains `<p>disconnected</p><div>tie shoelaces</div> , returns: ['missing', 'tying shoelaces']`
 4. Separate the returned character array with a `delimiter`, such as `['disconnected', 'tie shoelace']` => `disconnected'|'tie shoelace'`, the reason for separation: such as Chinese Simplified => Traditional Chinese (there are polymorphic characters): Lost contact shoelace => Lost contact shoelace, and the correct result should be `lost contact shoelace`, `lost contact` is a phrase, `tie shoelace` is A phrase will not change after conversion, and when `connection` is together, it will become `connection`
 5. Convert the translated result into an array with the `delimiter`, and traverse all the simplified characters in the code to replace the traditional characters
+
+## example
+
+![](https://s2.loli.net/2022/02/21/ah9qt4jIrwbSu7J.png)
