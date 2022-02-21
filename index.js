@@ -1,4 +1,4 @@
-const { sources, Compilation } = require('webpack');
+const { sources } = require('webpack');
 const path = require('path');
 const fetch = require('node-fetch');
 const fse = require('fs-extra');
@@ -83,7 +83,7 @@ function clearFile(filename = TRANSFROMSOURCETARGET) {
 
 const pluginName = 'TransformWebpackPlugin';
 
-class TransformWebpackPlugin {
+class TransformLanguageWebpackPlugin {
   constructor(
     options = {
       translateApiUrl: '',
@@ -107,98 +107,61 @@ class TransformWebpackPlugin {
       regex,
       outputTxt,
     } = this.options;
-    const outputNormal = {};
     const sourceAllList = {};
     const targetAllList = {};
-    compiler.hooks.thisCompilation.tap(pluginName, (compilation) => {
-      compilation.hooks.processAssets.tapAsync(
-        {
-          name: pluginName,
-          stage: Compilation.PROCESS_ASSETS_STAGE_OPTIMIZE_INLINE,
-        },
-        async (assets, callback) => {
-          for (const [pathname, source] of Object.entries(assets)) {
-            const dest = compiler.options.output.path;
-            const outputPath = path.resolve(dest, pathname);
-            if (!(pathname.endsWith('js') || pathname.endsWith('.html'))) {
-              continue;
-            }
-            let sourceCode = source.source();
-            const sourceList = getLanguageList(sourceCode, regex);
-            // 如果小于0，说明当前文件中没有中文，不需要替换
-            if (sourceList.length <= 0) continue;
-
-            // 翻译
-            const targetList = await transform({
-              translateApiUrl: translateApiUrl,
-              text: sourceList.join(separator),
-              from: from,
-              to: to,
-              separator: separator,
-            });
-
-            // 输出对照文件应该在出错之签
-            if (outputTxt) {
-              sourceAllList[outputPath] = sourceList.join(separator);
-              targetAllList[outputPath] = targetList.join(separator);
-            }
-
-            // 如果翻译后的结果与原数组的长度不一致，说明翻译有问题。此时应该抛出错误，解决API翻译的问题
-            // 如果API翻译有问题，基本整个插件就废了
-            // TODO：这一步应该可以在外部提供一个配置，用于手动校对。
-            if (targetList.length !== sourceList.length) {
-              if (outputTxt) {
-                // 出错了则输入日志
-                this.writeFile(
-                  outputPath,
-                  pathname,
-                  sourceAllList,
-                  targetAllList
-                );
-              }
-              throw new Error(
-                `Translation error, sourceList length: ${sourceList.length}, targetList length: ${targetList.length}`
-              );
-            }
-            // 将简体转换为繁体
-            // TODO: 待优化replace记录位置往后继续替换，减少搜索
-            targetList.forEach((phrase, index) => {
-              sourceCode = sourceCode.replace(sourceList[index], phrase);
-            });
-
-            outputNormal[outputPath] = {
-              filename: pathname,
-              content: sourceCode,
-              size: Buffer.from(sourceCode, 'utf-8').length,
-            };
-            // 一定要写return, 不然没用
-            return callback();
-          }
+    compiler.hooks.emit.tapAsync(pluginName, async (compilation, callback) => {
+      const assets = compilation.assets;
+      for (const [pathname, source] of Object.entries(assets)) {
+        const dest = compiler.options.output.path;
+        const outputPath = path.resolve(dest, pathname);
+        if (!(pathname.endsWith('js') || pathname.endsWith('.html'))) {
+          continue;
         }
-      );
+        let sourceCode = source.source();
+        const sourceList = getLanguageList(sourceCode, regex);
+        // 如果小于0，说明当前文件中没有中文，不需要替换
+        if (sourceList.length <= 0) continue;
 
-      compilation.hooks.afterProcessAssets.tap(pluginName, () => {
+        // 翻译
+        const targetList = await transform({
+          translateApiUrl: translateApiUrl,
+          text: sourceList.join(separator),
+          from: from,
+          to: to,
+          separator: separator,
+        });
+
+        // 输出对照文件应该在出错之签
         if (outputTxt) {
-          // 输出前先清空目标文件
-          clearFile();
+          sourceAllList[outputPath] = sourceList.join(separator);
+          targetAllList[outputPath] = targetList.join(separator);
         }
-        for (const [key, value] of Object.entries(outputNormal)) {
-          if (outputTxt) {
-            // 输出原语言与目标语言对照版
-            this.writeFile(
-              key,
-              outputNormal[key].filename,
-              sourceAllList,
-              targetAllList
-            );
-          }
 
-          compilation.updateAsset(
-            value.filename,
-            new sources.RawSource(value.content)
+        // 如果翻译后的结果与原数组的长度不一致，说明翻译有问题。此时应该抛出错误，解决API翻译的问题
+        // 如果API翻译有问题，基本整个插件就废了
+        // TODO：这一步应该可以在外部提供一个配置，用于手动校对。
+        if (targetList.length !== sourceList.length) {
+          if (outputTxt) {
+            // 出错了则输入日志
+            this.writeFile(outputPath, pathname, sourceAllList, targetAllList);
+          }
+          throw new Error(
+            `Translation error, sourceList length: ${sourceList.length}, targetList length: ${targetList.length}`
           );
         }
-      });
+        // 将简体转换为繁体
+        // TODO: 待优化replace记录位置往后继续替换，减少搜索
+        targetList.forEach((phrase, index) => {
+          sourceCode = sourceCode.replace(sourceList[index], phrase);
+        });
+        compilation.updateAsset(pathname, new sources.RawSource(sourceCode));
+        if (outputTxt) {
+          clearFile();
+          // 输出原语言与目标语言对照版
+          this.writeFile(outputPath, pathname, sourceAllList, targetAllList);
+        }
+      }
+      return callback();
     });
   }
   writeFile(outputPath, filename, sourceAllList, targetAllList) {
@@ -208,4 +171,4 @@ class TransformWebpackPlugin {
   }
 }
 
-module.exports = TransformWebpackPlugin;
+module.exports = TransformLanguageWebpackPlugin;
