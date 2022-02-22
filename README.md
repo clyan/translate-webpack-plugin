@@ -5,8 +5,8 @@
 English | [简体中文](./README.zh-CN.md)
 
 ## Introduction
+This plug-in was born in the scenario of converting simplified Chinese to traditional Chinese, and other scenarios have not been tested，In theory, you only need to write the regularity of the corresponding language, you can convert it into any other language.
 
-This plug-in was born in the scenario of converting simplified Chinese to traditional Chinese, and other scenarios have not been tested，In theory, you only need to write the regularity of the corresponding language, you can convert it into any other language
 
 ## Pre-Wrok
 
@@ -31,9 +31,7 @@ npm install
 ```bash
 npm run dev
 ```
-
-The default port is 8999. If your current IP is 127.0.0.1, then your translation api address is: `http://127.0.0.1:8999/api` (Modify it yourself)
-
+The default port is 8999. If your current IP is 127.0.0.1, then your translation api address is: `http://127.0.0.1:8999/api/post` (Modify it yourself)
 ## Install
 
 ### Webpack5.0
@@ -67,7 +65,7 @@ module.exports = defineConfig({
   configureWebpack: {
     plugins: [
       new TranslateWebpackPlugin({
-        translateApiUrl: 'http://127.0.0.1:8999/api',
+        translateApiUrl: 'http://127.0.0.1:8999/api/post',
         from: 'zh-CN',
         to: 'zh-TW',
         separator: '|',
@@ -81,14 +79,15 @@ module.exports = defineConfig({
 
 ## Option
 
-| Name | Type | Default | Description |
-| :-: | :-: | :-: | :-- |
-| **`translateApiUrl`** | `String` | `''` | `Address of the API` |
-| **`from`** | `String` | `'zh-CN'` | `source language` |
-| **`to`** | `String` | `'zh-TW'` | `target language` | `internally` |
-| **`separator`** | `String` | `'\|'` | `A language separator, a character used to delimit multiple phrases` |
-| **`regex`** | `RegExp` | `/[\u4e00-\u9fa5]/g` | `A regular expression that matches the source language` |
-| **`outputTxt`** | `Boolean` | `false` | `Used to output the source language and target language comparison, convenient to check for errors` |
+|Name|Type|Default|Description|
+|:--:|:--:|:------:|:----------|
+|**`translateApiUrl`**|`String`|`''`|`Address of the API`|
+|**`from`**|`String`|`'zh-CN'`|`source language`|
+|**`to`**|`String`|`'zh-TW'`|`target language`|`internally`|
+|**`separator`**|`String`|`'-'`|`A language separator, a character used to delimit multiple phrases`|
+|**`regex`**|`RegExp`|`/[\u4e00-\u9fa5]/g`|`A regular expression that matches the source language`|
+|**`outputTxt`**|`Boolean`|`false`|`Used to output the source language and target language comparison, convenient to check for errors`|
+|**`limit`**|`number`|`850`|`Used to limit the maximum character length, the default is 850, because each Chinese character is encoded by 9 times, and Google supports a maximum url length of 8124 (I am trying to use FireFox for Api)`|
 
 ## Basic Principles
 
