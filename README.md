@@ -8,6 +8,7 @@ English | [简体中文](./README.zh-CN.md)
 
 This plug-in was born in the scenario of converting simplified Chinese to traditional Chinese, and other scenarios have not been tested，In theory, you only need to write the regularity of the corresponding language, you can convert it into any other language
 
+**Please try not to use it in the development environment**, because this will frequently request the Google translation interface, and if the comments in the development environment are not removed, the translation is very slow, slowing down the construction speed in the development environment.
 ## Pre-Wrok
 
 The plugin relies on Google Translate API, but Google API is charged. Fortunately, there is a free API based on Puppeteer. In theory, the service based on Puppeteer will not hang, so you need to start from [Translateer](git@ github.com:ywymoshi/Translateer.git) or [translate-language-webpack-plugin](git@github.com:ywymoshi/translate-language-webpack-plugin.git) Pull the code from the `api` directory of the repository and deploy the service locally or on the server.

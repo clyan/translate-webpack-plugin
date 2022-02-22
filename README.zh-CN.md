@@ -8,6 +8,8 @@
 
 该插件诞生于中文简体转中文繁体场景下，其他场景未测试，理论上只需要编写匹配对应语言的正则，即可转移成任意其他语言，
 
+**请尽量不要在开发环境下使用**，因为这会频繁的请求谷歌翻译接口，同时开发环境下的注释未去除的情况下，翻译很慢，减慢开发环境下的构建速度。
+
 ## 前置工作
 
 该插件依赖于谷歌翻译 API，但是谷歌 API 是收费的，幸运的是，这里有一个基于 Puppeteer 免费 API,理论上基于 Puppeteer 该服务是不会挂掉的, 所以需要先从 [Translateer](git@github.com:ywymoshi/Translateer.git) 或者 [translate-language-webpack-plugin](git@github.com:ywymoshi/translate-language-webpack-plugin.git)仓库的`api`目录 拉取代码在本地或服务器部署服务。
