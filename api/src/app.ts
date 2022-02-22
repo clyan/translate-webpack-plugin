@@ -8,7 +8,9 @@ const { PUPPETEER_WS_ENDPOINT, PAGE_COUNT = '5', PORT = 8999 } = process.env;
 
 (async () => {
   const browser = PUPPETEER_WS_ENDPOINT
-    ? await puppeteer.connect({ browserWSEndpoint: PUPPETEER_WS_ENDPOINT })
+    ? await puppeteer.connect({
+        browserWSEndpoint: PUPPETEER_WS_ENDPOINT,
+      })
     : await puppeteer.launch({ headless: true });
 
   console.log('connected');
@@ -19,6 +21,7 @@ const { PUPPETEER_WS_ENDPOINT, PAGE_COUNT = '5', PORT = 8999 } = process.env;
   console.log('ready');
 
   fastify.register(require('./routers/api').default, { prefix: '/api' });
+  fastify.register(require('./routers/api').post, { prefix: '/api/post' });
   fastify.register(require('./routers/index').default, { prefix: '/' });
 
   try {
