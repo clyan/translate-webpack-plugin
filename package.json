@@ -1,6 +1,6 @@
 {
   "name": "translate-language-webpack-plugin",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "A plug-in that automatically converts languages",
   "main": "index.js",
   "module": "index.js",
