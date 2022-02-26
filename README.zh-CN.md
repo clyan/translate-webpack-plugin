@@ -72,7 +72,7 @@ module.exports = defineConfig({
         translateApiUrl: 'http://127.0.0.1:8999/api/post',
         from: 'zh-CN',
         to: 'zh-TW',
-        separator: '|',
+        separator: '-',
         regex: /[\u4e00-\u9fa5]/g,
         outputTxt: true,
       }),
@@ -88,10 +88,10 @@ module.exports = defineConfig({
 |**`translateApiUrl`**|`String`|`''`|`API地址`|
 |**`from`**|`String`|`'zh-CN'`|`源语言`|
 |**`to`**|`String`|`'zh-TW'`|`目标语言`|
-|**`separator`**|`String`|`'\|'`|`语言分割符， 用于内部多个词组分隔的字符, 示情况调整默认值`|
+|**`separator`**|`String`|`'\-'`|`语言分割符， 用于内部多个词组分隔的字符, 示情况调整默认值`|
 |**`regex`**|`RegExp`|`/[\u4e00-\u9fa5]/g`|`用于匹配源语言的正则表达式`|
 |**`outputTxt`**|`Boolean`|`false`|`用于输出源语言与目标语言的对照，方便查看是否有误`|
-|**`limit`**|`number`|`850`|`用于限制最大字符长度，默认为850，因为中文每个汉字encode后为9倍，谷歌最大支持url长度8124 (正尝试Api使用FireFox)`|
+|**`limit`**|`number`|`5000`|`谷歌网页端最大支持翻译字符长度，遇到翻译错误时，尝试将该值调小`|
 
 如果您觉得这个项目还不错, 可以在 Github 上面帮我点个 star, 支持一下作者 ☜(ﾟヮﾟ ☜)
 
