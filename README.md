@@ -71,7 +71,7 @@ module.exports = defineConfig({
         translateApiUrl: 'http://127.0.0.1:8999/api',
         from: 'zh-CN',
         to: 'zh-TW',
-        separator: '|',
+        separator: '-',
         regex: /[\u4e00-\u9fa5]/g,
         outputTxt: true,
       }),
@@ -82,14 +82,15 @@ module.exports = defineConfig({
 
 ## Option
 
-| Name | Type | Default | Description |
-| :-: | :-: | :-: | :-- |
-| **`translateApiUrl`** | `String` | `''` | `Address of the API` |
-| **`from`** | `String` | `'zh-CN'` | `source language` |
-| **`to`** | `String` | `'zh-TW'` | `target language` | `internally` |
-| **`separator`** | `String` | `'\|'` | `A language separator, a character used to delimit multiple phrases` |
-| **`regex`** | `RegExp` | `/[\u4e00-\u9fa5]/g` | `A regular expression that matches the source language` |
-| **`outputTxt`** | `Boolean` | `false` | `Used to output the source language and target language comparison, convenient to check for errors` |
+|Name|Type|Default|Description|
+|:--:|:--:|:------:|:----------|
+|**`translateApiUrl`**|`String`|`''`|`Address of the API`|
+|**`from`**|`String`|`'zh-CN'`|`source language`|
+|**`to`**|`String`|`'zh-TW'`|`target language`|`internally`|
+|**`separator`**|`String`|`'-'`|`A language separator, a character used to delimit multiple phrases`|
+|**`regex`**|`RegExp`|`/[\u4e00-\u9fa5]/g`|`A regular expression that matches the source language`|
+|**`outputTxt`**|`Boolean`|`false`|`Used to output the source language and target language comparison, convenient to check for errors`|
+|**`limit`**|`number`|`5000`|`谷歌网页端最大支持翻译字符长度，遇到翻译错误时，尝试将该值调小`|
 
 ## Basic Principles
 
