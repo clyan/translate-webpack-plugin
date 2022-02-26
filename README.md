@@ -68,7 +68,7 @@ module.exports = defineConfig({
         translateApiUrl: 'http://127.0.0.1:8999/api/post',
         from: 'zh-CN',
         to: 'zh-TW',
-        separator: '|',
+        separator: '-',
         regex: /[\u4e00-\u9fa5]/g,
         outputTxt: true,
       }),
@@ -87,7 +87,7 @@ module.exports = defineConfig({
 |**`separator`**|`String`|`'-'`|`A language separator, a character used to delimit multiple phrases`|
 |**`regex`**|`RegExp`|`/[\u4e00-\u9fa5]/g`|`A regular expression that matches the source language`|
 |**`outputTxt`**|`Boolean`|`false`|`Used to output the source language and target language comparison, convenient to check for errors`|
-|**`limit`**|`number`|`850`|`Used to limit the maximum character length, the default is 850, because each Chinese character is encoded by 9 times, and Google supports a maximum url length of 8124 (I am trying to use FireFox for Api)`|
+|**`limit`**|`number`|`5000`|`谷歌网页端最大支持翻译字符长度，遇到翻译错误时，尝试将该值调小`|
 
 ## Basic Principles
 
