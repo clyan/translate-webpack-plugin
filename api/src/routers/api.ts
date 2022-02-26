@@ -16,14 +16,20 @@ const common = async (request: any, reply: any, type: 'get' | 'post') => {
       });
     return;
   }
-
   await page.evaluate(
-    ([from, to, text]) => {
-      location.href = `?sl=${from}&tl=${to}&text=${encodeURIComponent(text)}`;
+    ([from, to]) => {
+      location.href = `?sl=${from}&tl=${to}`;
     },
-    [from, to, text]
+    [from, to]
   );
 
+  await page.waitForSelector(`span[lang=${from}] textarea`);
+  const fromEle = await page.$(`span[lang=${from}] textarea`);
+  await page.evaluate((el, text) => {
+    el.value= text
+  },fromEle, text)
+  // 模拟一次输入，使得谷歌翻译可以翻译
+  await page.type(`span[lang=${from}] textarea`, ' ');
   // translating...
   await page.waitForSelector(`span[lang=${to}]`);
 
