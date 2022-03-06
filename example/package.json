@@ -19,7 +19,7 @@
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
-    "translate-language-webpack-plugin": "^5.0.2",
+    "translate-language-webpack-plugin": "^5.0.3",
     "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {
