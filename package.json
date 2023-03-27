@@ -1,5 +1,5 @@
 {
-  "name": "translate-language-webpack-plugin",
+  "name": "@clyan/translate-language-webpack-plugin",
   "version": "5.0.3",
   "description": "A plug-in that automatically converts languages",
   "main": "index.js",
