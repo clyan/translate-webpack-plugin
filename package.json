@@ -1,5 +1,5 @@
 {
-  "name": "@clyan/translate-language-webpack-plugin",
+  "name": "@clyan/translate-webpack-plugin",
   "version": "5.0.3",
   "description": "A plug-in that automatically converts languages",
   "main": "index.js",
@@ -12,12 +12,19 @@
     "access": "public"
   },
   "scripts": {
-    "release": "release-it",
     "api": "cd api && ni && nr dev",
     "dev:vue": "cd playgrounds/vue && ni && nr serve",
-    "prepare": "husky install",
+    "prepare": "husky install && nr prepare:hooks",
+    "prepare:hooks": "npx husky set .husky/commit-msg \"pnpm exec --  commitlint --edit $1\" ",
     "lint": "eslint --cache .",
-    "lint:fix": "nr lint --fix"
+    "lint:fix": "nr lint --fix",
+    "release:dry": "release-it --dry-run --no-npm",
+    "release:info": "release-it --release-version",
+    "release:beta:no-npm": "release-it --preRelease=beta --no-npm",
+    "release:beta": "release-it --preRelease=beta",
+    "release:no-npm": "release-it --no-npm",
+    "release:no-increment": "release-it --no-increment --no-npm",
+    "release": "release-it"
   },
   "repository": {
     "type": "git",
@@ -48,12 +55,15 @@
     "husky": "^8.0.3",
     "lint-staged": "^10.2.7",
     "prettier": "2.1.0",
-    "release-it": "^15.4.1",
+    "release-it": "^15.9.3",
     "webpack": "^5.69.1"
   },
   "lint-staged": {
     "*.{js,ts,tsx,vue}": [
       "eslint --cache --fix"
     ]
-  }
+  },
+  "contributors": [
+    "Clyan (https://github.com/clyan)"
+  ]
 }
