@@ -13,16 +13,18 @@
   },
   "scripts": {
     "release": "release-it",
-    "api": "cd api && npm install && npm run dev",
-    "dev:example": "cd example && npm install && npm run serve",
-    "prepare": "husky install"
+    "api": "cd api && ni && nr dev",
+    "dev:vue": "cd playgrounds/vue && ni && nr serve",
+    "prepare": "husky install",
+    "lint": "eslint --cache .",
+    "lint:fix": "nr lint --fix"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ywymoshi/translate-language-webpack-plugin.git"
   },
   "keywords": [],
-  "author": "ywymoshi",
+  "author": "alyan",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ywymoshi/translate-language-webpack-plugin/issues"
@@ -45,28 +47,12 @@
     "lint-staged": "^10.2.7",
     "prettier": "2.1.0",
     "release-it": "^14.12.4",
-    "webpack": "^5.69.1"
+    "webpack": "^5.69.1",
+    "eslint-plugin-vue": "^9.10.0"
   },
   "lint-staged": {
-    "*.md": "prettier --write",
-    "*.{ts,tsx,js,vue,less}": "prettier --write",
-    "*.{ts,tsx,js,vue}": "eslint --fix"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "es6": true,
-      "node": true,
-      "jest": true,
-      "browser": true
-    },
-    "parserOptions": {
-      "ecmaVersion": 2019,
-      "requireConfigFile": "false"
-    },
-    "extends": [
-      "eslint:recommended"
-    ],
-    "rules": {}
+    "*.{js,ts,tsx,vue,md}": [
+      "eslint --cache --fix"
+    ]
   }
 }
