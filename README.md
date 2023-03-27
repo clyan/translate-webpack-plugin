@@ -1,4 +1,4 @@
-<h1 align="center">translate-language-webpack-plugin</h1>
+<h1 align="center">translate-webpack-plugin</h1>
 
 <p align="center">A plug-in for automatic language conversion, unlike i18N, no need to write multiple sets of language files, With Google API translation, you only need to write one language and convert it to any other language</p>
 
@@ -10,14 +10,14 @@ This plug-in was born in the scenario of converting simplified Chinese to tradit
 **Please try not to use it in the development environment**, because this will frequently request the Google translation interface, and if the comments in the development environment are not removed, the translation is very slow, slowing down the construction speed in the development environment.
 ## Pre-Wrok
 
-The plugin relies on Google Translate API, but Google API is charged. Fortunately, there is a free API based on Puppeteer. In theory, the service based on Puppeteer will not hang, so you need to start from [Translateer](git@ github.com:ywymoshi/Translateer.git) or [translate-language-webpack-plugin](git@github.com:ywymoshi/translate-language-webpack-plugin.git) Pull the code from the `api` directory of the repository and deploy the service locally or on the server.
+The plugin relies on Google Translate API, but Google API is charged. Fortunately, there is a free API based on Puppeteer. In theory, the service based on Puppeteer will not hang, so you need to start from [Translateer](git@ github.com:clyan/Translateer.git) or [translate-webpack-plugin](git@github.com:clyan/translate-webpack-plugin.git) Pull the code from the `api` directory of the repository and deploy the service locally or on the server.
 
 Note: The server deploying the API service needs to be able to access `https://translate.google.cn/` (Scientific Internet).
 
 **Clone Code**
 
 ```bash
-git clone git@github.com:ywymoshi/Translateer.git
+git clone git@github.com:clyan/Translateer.git
 ```
 
 **Install Dependencies**
@@ -37,21 +37,21 @@ The default port is 8999. If your current IP is 127.0.0.1, then your translation
 ### Webpack5.0
 
 ```bash
-  npm i --save-dev translate-language-webpack-plugin
+  npm i --save-dev translate-webpack-plugin
 ```
 
 ```bash
-  yarn add --dev translate-language-webpack-plugin
+  yarn add --dev translate-webpack-plugin
 ```
 
 ### Webpack4.0
 
 ```bash
-  npm i --save-dev translate-language-webpack-plugin@4
+  npm i --save-dev translate-webpack-plugin@4
 ```
 
 ```bash
-  yarn add --dev translate-language-webpack-plugin@4
+  yarn add --dev translate-webpack-plugin@4
 ```
 
 ## Usage
@@ -59,7 +59,7 @@ The default port is 8999. If your current IP is 127.0.0.1, then your translation
 **vue.config.js**
 
 ```javascript
-const TranslateWebpackPlugin = require('translate-language-webpack-plugin');
+const TranslateWebpackPlugin = require('translate-webpack-plugin');
 module.exports = defineConfig({
   transpileDependencies: true,
   configureWebpack: {
