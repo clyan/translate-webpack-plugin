@@ -19,7 +19,8 @@
   "dependencies": {
     "fastify": "^3.29.5",
     "fastify-static": "^4.7.0",
-    "puppeteer": "^11.0.0",
-    "puppeteer-cn": "^0.1.8"
+    "puppeteer": "^24.2.1",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
   }
 }
